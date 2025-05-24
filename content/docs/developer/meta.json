@@ -1,0 +1,8 @@
+{
+  "title": "Developer",
+  "root": false,
+  "pages": [
+    "getting-started",
+    "developing-a-module"
+  ]
+}
