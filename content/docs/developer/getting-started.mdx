@@ -1,0 +1,91 @@
+---
+title: Getting Started
+---
+
+## Repository
+To be able to use the VulpesCloud API, you need to add the repository to your build system.
+```kotlin tab="build.gradle.kts"
+maven {
+    name = "vulpescloudRepositorySnapshots"
+    url = uri("https://repo.vulpescloud.de/snapshots")
+}
+
+```
+
+```groovy tab="build.gradle"
+maven {
+    name "vulpescloudRepositorySnapshots"
+    url "https://repo.vulpescloud.de/snapshots"
+}
+```
+
+```xml tab="pom.xml"
+<repository>
+  <id>vulpescloud-repository-snapshots</id>
+  <name>VulpesCloud Repository</name>
+  <url>https://repo.vulpescloud.de/snapshots</url>
+</repository>
+```
+
+## Dependencies
+To use the VulpesCloud API, you need to add the following dependencies to your project.
+
+| artifact id           | usage                                                                                         |
+|-----------------------|-----------------------------------------------------------------------------------------------|
+| VulpesCloud-api       | When developing anything related to VulpesCloud                                               |
+| VulpesCloud-bridge    | When developing Minecraft plugins that use the VulpesCloud API                                |
+| VulpesCloud-connector | Generally no use                                                                              |
+| VulpesCloud-node      | When developing modules for the Cloud                                                         |
+| VulpesCloud-wrapper   | When developing a plugin that needs more access to the service than what the bridge can offer |
+
+<Callout>Replace the **%version%** with the version that you want to use! Newest Version is **2.0.0-ALPHA**</Callout>
+
+```kotlin tab="build.gradle.kts"
+dependencies {
+    compileOnly("de.vulpescloud:VulpesCloud-api:%version%")
+    compileOnly("de.vulpescloud:VulpesCloud-node:%version%")
+    compileOnly("de.vulpescloud:VulpesCloud-bridge:%version%")
+    compileOnly("de.vulpescloud:VulpesCloud-connector:%version%")
+    compileOnly("de.vulpescloud:VulpesCloud-wrapper:%version%")
+}
+```
+
+```groovy tab="build.gradle"
+dependencies {
+    compileOnly "de.vulpescloud:VulpesCloud-api:%version%"
+    compileOnly "de.vulpescloud:VulpesCloud-node:%version%"
+    compileOnly "de.vulpescloud:VulpesCloud-bridge:%version%"
+    compileOnly "de.vulpescloud:VulpesCloud-connector:%version%"
+    compileOnly "de.vulpescloud:VulpesCloud-wrapper:%version%"
+}
+```
+
+```xml tab="pom.xml"
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-api</artifactId>
+  <version>%version%</version>
+</dependency>
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-node</artifactId>
+  <version>%version%</version>
+</dependency>
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-bridge</artifactId>
+  <version>%version%</version>
+</dependency>
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-connector</artifactId>
+  <version>%version%</version>
+</dependency>
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-wrapper</artifactId>
+  <version>%version%</version>
+</dependency>
+```
+
+
