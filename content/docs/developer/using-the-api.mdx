@@ -1,0 +1,30 @@
+---
+title: Using the API
+---
+
+## Node API
+For easy access to the Node API there is the `VulpesNode` object.
+
+Example:
+```kotlin tab="kotlin"
+import de.vulpescloud.node.VulpesNode
+
+fun test() {
+    VulpesNode.serviceProvider
+    VulpesNode.taskProvider
+}
+```
+<Callout>You might have to add Koin as a Dependency in your project!</Callout>
+
+## Service API
+On services, you have the `VulpesBridge` object.
+
+Example:
+```kotlin tab="kotlin"
+import de.vulpescloud.bridge.VulpesBridge
+
+fun test() {
+    VulpesBridge.getServiceProvider()
+    VulpesBridge.getEventManager()
+}
+```

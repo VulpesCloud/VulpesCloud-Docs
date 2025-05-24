@@ -3,6 +3,8 @@
   "root": false,
   "pages": [
     "getting-started",
-    "developing-a-module"
+    "developing-a-module",
+    "using-the-api",
+    "using-virtual-config"
   ]
 }

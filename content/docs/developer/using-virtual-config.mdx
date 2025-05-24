@@ -1,0 +1,31 @@
+---
+title: Using the VirtualConfig API
+---
+
+## Introduction
+The VirtualConfig API allows you to easily store your config in MySQL. This can be really useful for Modules that have a config that should be the same across all nodes and services.
+
+### Usage
+
+A VirtualConfig has a few methods that you can use to interact with the config.
+- `init()` - Initializes the config and loads it from the database.
+- `getEntry(entry: String, default: T)` - Gets an entry from the config.
+- `setEntry(entry: String, value: T)` - Sets an entry in the config.
+- `pull()` - Pulls the config from the database.
+- `publish()` - Publishes the config to the database.
+- `loadLocalChanges()` - Loads local changes to the config.
+- `close()` - Closes the local config.
+
+Example:
+```kotlin tab="kotlin"
+val config = VirtualConfig("testConfig")
+
+config.init()
+
+config.setEntry("test.idk", "testValue")
+config.publish()
+
+val value = config.getEntry("test.idk", "defaultValue")
+println("Value: $value") // Output: Value: testValue
+config.close()
+```
