@@ -1,0 +1,111 @@
+---
+title: Developing a Module
+---
+
+## Setting up your project
+
+### Dependencies
+You need the **node** and **api** dependency to develop a module.
+```kotlin tab="build.gradle.kts"
+dependencies {
+    compileOnly("de.vulpescloud:VulpesCloud-api:%version%")
+    compileOnly("de.vulpescloud:VulpesCloud-node:%version%")
+}
+```
+
+```groovy tab="build.gradle"
+dependencies {
+    compileOnly "de.vulpescloud:VulpesCloud-api:%version%"
+    compileOnly "de.vulpescloud:VulpesCloud-node:%version%"
+}
+```
+
+```xml tab="pom.xml"
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-api</artifactId>
+  <version>%version%</version>
+</dependency>
+<dependency>
+  <groupId>de.vulpescloud</groupId>
+  <artifactId>VulpesCloud-node</artifactId>
+  <version>%version%</version>
+</dependency>
+```
+
+### module.json
+Your module needs a `module.json` located in the `resources` folder of your project.
+This file contains metadata about your module, such as its name, version, and description. Here is an example of a `module.json` file:
+
+```json
+{
+  "name": "Example-Module",
+  "description": "An example module for VulpesCloud",
+  "main": "de.example.module.ExampleModule",
+  "authors": [
+    "Example"
+  ],
+  "website": "https://example.de",
+  "version": "1.0.0",
+  "headNodeOnly": false,
+  "copyToServices": false,
+  "platforms": []
+}
+```
+#### Fields
+- `name`: The name of your module, this cannot contain spaces.
+- `description`: A short description of your module.
+- `main`: The main class of your modul.
+- `authors`: A list of authors of your module.
+- `website`: A website for your module, this can be a GitHub repository or a website.
+- `version`: The version of your module.
+- `headNodeOnly`: If this is set to true, the module will only be loaded on the head node.
+- `copyToServices`: If this is set to true, the module will be copied to services.
+- `platforms`: A list of platforms that your module runs on. The Module will be copied into the plugins/mods folder of the services. This accepts for example `velocity` or `purpur`
+
+### The Main Class
+The Main Class has to implement the `VulpesModule` interface.
+This interface gives you the `onEnable` and `onDisable` methods.
+
+```java tab="java"
+package de.example.module;
+
+import de.vulpescloud.api.module.VulpesModule;
+
+public class ExampleModule implements VulpesModule {
+
+    private Logger logger = LoggerFactory.getLogger(ExampleModule.class)
+
+    @Override
+    public void onEnable() {
+        logger.info("Enabled ExampleModule!");
+    }
+
+    @Override
+    public void onDisable() {
+        logger.info("Disabled ExampleModule!");
+    }
+}
+```
+
+```kotlin tab="kotlin"
+package de.example.module
+
+import de.vulpescloud.api.module.VulpesModule
+
+class ExampleModule : VulpesModule {
+
+    private val logger = LoggerFactory.getLogger(ExampleModule::class.java)
+
+    override fun onEnable() {
+        logger.info("Enabled ExampleModule!")
+    }
+
+    override fun onDisable() {
+        logger.info("Disabled ExampleModule!")
+    }
+}
+```
+
+## Running the Module
+To run your module, you need to build it and place it in the `modules` folder of your VulpesCloud installation.
