@@ -28,3 +28,24 @@ fun test() {
     VulpesBridge.getEventManager()
 }
 ```
+
+## ServiceProvider
+    ### Common
+    Both in the Node and Bridge implementation you have these methods:
+
+    - `fun getServiceByName(name: String): ServiceInfo?`
+        Get a Service by it's name, returns `null` if the Service cannot be found!
+
+    - `fun getServiceByUUID(uuid: UUID): ServiceInfo?`
+        Get a Service by it's UUID, returns `null` if the Service cannot be found!
+
+    - `fun services(): List<ServiceInfo>`
+        Get a list of all Services!
+        
+    - `fun getServicesByFilter(filter: ServiceFilter): List<ServiceInfo>`
+        Get a list of Services by a ServiceFilter
+    
+    ### Bridge
+    With the Bridge implementation you can additonally get the LocalService
+    - `fun getLocalService(): ServiceInfo`
+    
