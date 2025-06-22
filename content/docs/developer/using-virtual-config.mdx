@@ -2,30 +2,66 @@
 title: Using the VirtualConfig API
 ---
 
-## Introduction
+# Introduction
 The VirtualConfig API allows you to easily store your config in MySQL. This can be really useful for Modules that have a config that should be the same across all nodes and services.
 
-### Usage
+## Usage
 
-A VirtualConfig has a few methods that you can use to interact with the config.
-- `init()` - Initializes the config and loads it from the database.
-- `getEntry(entry: String, default: T)` - Gets an entry from the config.
-- `setEntry(entry: String, value: T)` - Sets an entry in the config.
-- `pull()` - Pulls the config from the database.
-- `publish()` - Publishes the config to the database.
-- `loadLocalChanges()` - Loads local changes to the config.
-- `close()` - Closes the local config.
+### VirtualConfigProvider
+
+  Provides methods to manage and access virtual config instances.
+ 
+  #### Methods
+ 
+  - `getConfig(name: String, description: String = "<none>", database: Database? = null): VirtualConfig`  
+    Retrieves a `VirtualConfig` instance by its name. If the config does not exist locally, a new instance is created. Optionally, a description and exposed database instance can be provided.
+ 
+  - `getAllConfigNames(database: Database? = null): List<String>`  
+    Returns a list of all `VirtualConfig` names stored in the database. Optionally accepts an exposed database instance.
+ 
+  - `getAllConfigs(database: Database? = null): List<VirtualConfig>`  
+    Loads all `VirtualConfig` instances from the database, caches them locally, and returns the list. Optionally accepts an exposed database instance.
+ 
+  - `unregisterConfig(name: String)`  
+    Removes a locally stored `VirtualConfig` by name.
+ 
+  - `getAllLocalConfigs(): List<VirtualConfig>`  
+    Returns all `VirtualConfig` instances currently stored locally.
+
+
+
+### VirtualConfig
+
+    Provides methods to interact with a virtual config instance.
+
+    #### Methods
+
+    - `getEntry(entry: String, default: T)`  
+        Retrieves an entry from the config. Returns the default value if the entry does not exist.
+
+    - `setEntry(entry: String, value: T)`  
+        Sets or updates an entry in the config.
+
+    - `pull()`  
+        Pulls the latest config data from the database.
+
+    - `publish()`  
+        Publishes the current config state to the database.
+
+    - `loadLocalChanges()`  
+        Loads any local changes made to the config.
+
+    - `close()`  
+        Closes the local config instance and releases resources.
 
 Example:
 ```kotlin tab="kotlin"
-val config = VirtualConfig("testConfig")
-
-config.init()
+val config = VirtualConfigProvider.getConfig("ExampleConfig")
 
 config.setEntry("test.idk", "testValue")
 config.publish()
 
 val value = config.getEntry("test.idk", "defaultValue")
 println("Value: $value") // Output: Value: testValue
-config.close()
+config.close()  
 ```
